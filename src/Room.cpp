@@ -51,21 +51,18 @@ void Room::turnOffAircondition() {
 
 
 void Room::readParamsFromConsole(){
-    cout << "In this " << roomType << " is " << Room::tempIndicator->getTempValue() << " degrees Celsius. Would you like to turn on Aircondition? (write y or n)" << endl;
     string yesNo;
+    cout << "In this " << roomType << " is " << Room::tempIndicator->getTempValue() << " degrees Celsius. Would you like to turn on Aircondition? (write y or n)" << endl;
+    do {
     cin >> yesNo;
-        do
-        {
-            if (yesNo == "y")
+            if (yesNo == "y" || yesNo == "n")
             {
+                if (yesNo == "y") {
                 aircondition.setParametersFromConsole();
                 trunOnAircondition();
                 Room::tempIndicator->setTempValue(aircondition.getValueOfAircondition());
-            }
-            else if (yesNo == "n")
-            {
-            }
-            else
+                }
+            } else 
             {
                 cout << "It is wrong answer. Try again." << endl;
             }

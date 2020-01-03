@@ -103,10 +103,10 @@ void ConferenceRoom::readParamsFromConsole()
 void ConferenceRoom::readListOfCompaniesFromConsole() {
     cout << "Would you like to write names of companies which will rent his Conference Room in next week? (Write y or n)" << endl;
     string yesNo;
+    do
+        {
     cin >> yesNo;
     cout << endl;
-        do
-        {
             if (yesNo == "y")
             {
                 int amountOfCompanies;
@@ -134,9 +134,13 @@ void ConferenceRoom::readListOfCompaniesFromConsole() {
                 sort(listOfCompany.begin(), listOfCompany.end(), sortByName);
                 cout << "Companies sort by name: \n Name\tDay of week\n";
                 for_each(listOfCompany.begin(), listOfCompany.end(), showListName);
+
                 sort(listOfCompany.begin(), listOfCompany.end(), sortByRentDay);
-                cout << "Companies sort by number of rent day: \nDay of week\tName\n";
-                for_each(listOfCompany.begin(), listOfCompany.end(), showListDay);
+                cout << "Companies sort by number of rent day: \nDay\tName\n";
+                vector<Company>::iterator ir;
+                for (ir = listOfCompany.begin(); ir != listOfCompany.end(); ir++)
+                cout << ir->rentDayNumber << "\t" <<  ir->companyName << endl;
+                //for_each(listOfCompany.begin(), listOfCompany.end(), showListDay);
             }
             else if (yesNo == "n")
             {
@@ -193,19 +197,30 @@ void showListDay(const Company & cc) {
 void ConferenceRoom::readNumberOfChairs()
 {
     string yesNo;
+    do {
     cout << "In this Conference Room are " << chairNumber << " chairs. Would you like to be another number of chairs? (Write y or n)" << endl;
     cin >> yesNo;
     cout << endl;
-    do
-    {
-        if (yesNo == "y")
+        if (yesNo == "y" || yesNo == "n")
         {
+            if (yesNo == "y") {
             cout << "So how many chairs should be in this Conference Room: " << endl;
-            cin >> chairNumber;
-            cout << endl;
-        }
-        else if (yesNo == "n")
-        {
+            }
+            do {
+                cin >> chairNumber;
+                cout << endl;
+                if (cin.fail()) {
+                    chairNumber=1000;
+                    cin.clear();
+                    string s;
+                    cin>>s;
+                }
+                if (chairNumber >= 1 && chairNumber <= 500) {
+                    cout << "You choose: " << chairNumber << " chairs." << endl;
+                } else {
+                    cout << "Wrong answer. Try agin.  Value for number of chairs should be between 1 and 500: " << endl;
+                }
+            } while (chairNumber < 1 || chairNumber > 500);   
         }
         else
         {
@@ -220,16 +235,14 @@ void ConferenceRoom::readOpenCloseWindowsFromConsole()
     if (areWindowsOpen)
     {
         cout << "Windows are opened. Do you want to close them? (Write y or n)" << endl;
-        cin >> yesNo;
-        cout << endl;
         do
         {
-            if (yesNo == "y")
+        cin >> yesNo;
+        cout << endl;
+            if (yesNo == "y" || yesNo == "n")
             {
+                if (yesNo == "y")
                 closeWindows();
-            }
-            else if (yesNo == "n")
-            {
             }
             else
             {
@@ -240,16 +253,14 @@ void ConferenceRoom::readOpenCloseWindowsFromConsole()
     else
     {
         cout << " Windows are closed. Do you want to open it? (Write y or n)" << endl;
-        cin >> yesNo;
-        cout << endl;
         do
         {
-            if (yesNo == "y")
+        cin >> yesNo;
+        cout << endl;
+            if (yesNo == "y" || yesNo == "n")
             {
+                if (yesNo == "y")
                 openWindows();
-            }
-            else if (yesNo == "n")
-            {
             }
             else
             {

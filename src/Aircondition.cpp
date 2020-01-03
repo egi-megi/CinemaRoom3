@@ -30,7 +30,6 @@ Aircondition::~Aircondition()
 }
 
 int Aircondition::getValueOfAircondition() {
-    cout << "Value of temperature for aircondition is: " << valueOfAircondition << "." << endl;
     return valueOfAircondition;
 }
 
@@ -58,8 +57,21 @@ bool Aircondition::operator==(Aircondition const & ar1) const{
 
 void Aircondition::setValueOfAircondition(){
     cout << "What temperature shoud be set on aircondition: ";
+    do {
     cin >> valueOfAircondition;
     cout << endl;
+      if (cin.fail()) {
+            valueOfAircondition=100;
+            cin.clear();
+            string s;
+            cin>>s;
+        }
+    if (valueOfAircondition >= 0 && valueOfAircondition <= 50) {
+        cout << "Value of temperature for aircondition is: " << valueOfAircondition << "." << endl;
+    } else {
+        cout << "Wrong answer. Try agin.  Value for aircondition should be between 0 and 50: " << endl;
+    }
+    } while (valueOfAircondition < 0 || valueOfAircondition > 50);
     /*if (valueOfAircondition < va) {
         int i = va - valueOfAircondition;
         while(i > 0) {

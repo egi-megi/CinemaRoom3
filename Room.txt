@@ -1,15 +1,15 @@
-24
+7
 1
 1
 0
 1
-24
+7
 1
 1
 0
 2d
-"Powrót Jedi"
-222
+"Imperium kontratakuje"
+333
 digital
 9
 16

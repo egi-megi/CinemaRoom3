@@ -166,7 +166,7 @@ bool CinemaRoom::operator==(CinemaRoom const &ro1) const
     }
     else
     {
-        cout << "Saved objcet and read object are not equal." << endl;
+        cout << "Saved object and read object are not equal." << endl;
         return false;
     }
 }
@@ -186,11 +186,13 @@ void CinemaRoom::readParamsFromConsole()
         m->readMovieFromConsole();
         playMovie(m);
     }
+    //Screen *s = new Screen;
+    //s->readHeightOfScreenForCinemaRoomFromConsole();
 }
 
 void CinemaRoom::write(ostream &os) const
 {
-    cout << "saving ciname room" << endl;
+    cout << "Saving ciname room" << endl;
     Room::write(os);
     if (playingMovie != NULL)
     {

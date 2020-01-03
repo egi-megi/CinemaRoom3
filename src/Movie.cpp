@@ -54,8 +54,6 @@ void Movie::setTitle() {
   } while (titleSymbol != "pj" && titleSymbol != "ik");
 }
 
-//string Movie::
-
 string Movie::getKindOfMovie() {
   return kindOfMovie;
 }

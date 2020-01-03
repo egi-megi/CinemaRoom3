@@ -14,9 +14,9 @@ class Screen
         int getHeightOfScreen();
         void setHeightOfScreen(int heightOfScreen);
         void setProportionOfScreenFromMovie(Movie *movie);
-        void readHeightOfScreenForCinemaRoomFromConsole();
+        //void readHeightOfScreenForCinemaRoomFromConsole();
         int getWidthOfScreen();
-        void computeWidthOfScreen();
+        int computeWidthOfScreen();
 
         friend ostream & operator<<(ostream & os, const Screen & s);
         friend istream & operator>>(istream & is, Screen & sc);

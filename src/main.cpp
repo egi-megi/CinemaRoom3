@@ -29,7 +29,6 @@ bool saveAndReadFiles() {
         cout << endl;
     ofstream fout;
     fout.open("Room.txt");
-    //cinemaRoom->setNumberOfChairs();
     cout << *cinemaRoom << endl;
     fout << *cinemaRoom;
     fout.close();
@@ -108,13 +107,15 @@ int main()
     rooms[1]=new CinemaRoom4D();
     rooms[2]=new ConferenceRoom();
     do { //Main loop
-        cout<<"Choose room to manage"<<endl;
+        cout << endl;
+        cout << "***** Choose room to manage *****"<< endl;
         for (int i=0 ; i< 3; i++) {
             cout<<i<<" "<<rooms[i]->getRoomTypeName()<<endl;
         }
         cout << "7 - save all" << endl;
         cout << "8 - read" << endl;
-        cout<<"9 - exit"<<endl;
+        cout << "9 - exit"<<endl;
+        cout << endl;
         cin>>lastKey;
         if (cin.fail()) {
             lastKey=100;

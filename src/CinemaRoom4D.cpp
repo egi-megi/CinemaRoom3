@@ -48,16 +48,21 @@ void CinemaRoom4D::armchairTurnOnFromConsole() {
 string yesNo;
 if (isArmchairOn == false) {
     cout << "Armchairs are turn off. Would you like to turn on them? (Write y or n)" << endl;
-    cin >> yesNo;
-    if (yesNo == "y") {
-        cout << "Now armchairs are turn on." << endl;
-        isArmchairOn = true;
-    } else {
-        cout << "Still armchairs are turn off." << endl;
-    }
+    do {
+        cin >> yesNo;
+        if (yesNo == "y") {
+            cout << "Now armchairs are turn on." << endl;
+            isArmchairOn = true;
+        } else  if (yesNo == "n") {
+            cout << "Still armchairs are turn off." << endl;
+        } else {
+            cout << "It is wrong answer. Try again." << endl;
+        }
+    } while (yesNo != "y" && yesNo != "n");
 } else {
     cout << "Armchairs have been turn on." << endl;
 }
+
 }
 
 void CinemaRoom4D::armchairTurnOff(){

@@ -50,25 +50,40 @@ void Screen::setProportionOfScreenFromMovie(Movie *movie)
     proportionOfScreenWidth = movie->getProportionOfScreenWidthForMovie();
 }
 
-void Screen::readHeightOfScreenForCinemaRoomFromConsole() {
+/*void Screen::readHeightOfScreenForCinemaRoomFromConsole() {
   cout << "Would you like to watch movie on screen with height: 4, 5 or 6 meteres? (Write 4, 5 or 6)" << endl;
-  cin >> heightOfScreen;
-  cout << endl;
+  while (cin >> heightOfScreen)
+  {
+  try {
+    computeWidthOfScreen();
+  }
+  catch (const char * s)
+  {
+    cout << s << endl;
+    cout << "Write height of screen 4, 5 or 6." << endl;
+    continue;
+  }
+
   cout << "You choose Room with screen, which is " << heightOfScreen << " metres.";
+  computeWidthOfScreen();
   cout << "So for the movie, which you choose, the width of screen will be set on " << widthOfScreen << " meters." << endl;
+  cout << "You can choose another height of screen or go out of this option by \"e\":";
 }
+}*/
 
 int Screen::getWidthOfScreen() {
   return widthOfScreen;
 }
 
-void Screen::computeWidthOfScreen() {
+int Screen::computeWidthOfScreen() {
   //widthOfScreen = static_cast<double>((propWidth * heightOfScreen)/propHeight);
+  //if (heightOfScreen != 4)
+  //throw "Height of screen should 4, 5 or 6 meteres.";
   widthOfScreen = ((proportionOfScreenWidth * heightOfScreen)/proportionOfScreenHeight);
   if (widthOfScreen%10 != 0) {
     widthOfScreen+=1;
   }
-  cout << "Screen has " << heightOfScreen << " m of height and should be set with " << widthOfScreen << " m of width." << endl;
+return widthOfScreen;
 }
 
 ostream & operator<<(ostream & os, const Screen& sc) {
