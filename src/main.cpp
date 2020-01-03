@@ -29,7 +29,7 @@ bool saveAndReadFiles() {
         cout << endl;
     ofstream fout;
     fout.open("Room.txt");
-    cinemaRoom->setNumberOfChairs();
+    //cinemaRoom->setNumberOfChairs();
     cout << *cinemaRoom << endl;
     fout << *cinemaRoom;
     fout.close();
@@ -117,7 +117,8 @@ int main()
         cout<<"9 - exit"<<endl;
         cin>>lastKey;
         if (cin.fail()) {
-            lastKey=100;cin.clear();
+            lastKey=100;
+            cin.clear();
             string s;
             cin>>s;
         }
@@ -132,7 +133,7 @@ int main()
             read(rooms);
             }
         } else  {
-            cout<<"unknown command"<<endl;
+            cout<<"Unknown command"<<endl;
         }
     } while (lastKey!=9);
     for (int j=0 ; j<3; j++) {

@@ -23,21 +23,20 @@ class CinemaRoom: public Room
         virtual void closeAllInRoom();
         virtual void readParamsFromConsole();
         virtual string getRoomTypeName();
+        //void trunOnAircondition();
+        //void turnOffAircondition();
+        void checkTemperature();
+        virtual void write(ostream & os) const;
+        virtual void read(istream &is);
         void operator+= (Projector* proj);
         void operator-= (Projector* projDel);
         bool operator==(CinemaRoom const & cro1) const;
-        virtual void write(ostream & os) const;
-        virtual void read(istream &is);
-        void trunOnAircondition();
-        void turnOffAircondition();
-        void checkTemperature();
-
        
     protected:
      
     private:
-    Aircondition aircondition;
-     Projector *projectorDigital;
+        //Aircondition aircondition;
+        Projector *projectorDigital;
         Projector *projectorAnalog;
         Screen screen;
         Sound sound;

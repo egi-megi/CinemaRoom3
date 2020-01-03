@@ -1,7 +1,18 @@
 {
     "files.associations": {
         "*.tpp": "cpp",
-        "iosfwd": "cpp"
+        "iosfwd": "cpp",
+        "__functional_base": "cpp",
+        "istream": "cpp",
+        "locale": "cpp",
+        "memory": "cpp",
+        "tuple": "cpp",
+        "utility": "cpp",
+        "iostream": "cpp",
+        "stack": "cpp",
+        "list": "cpp",
+        "algorithm": "cpp",
+        "ostream": "cpp"
     },
     "terminal.integrated.shell.windows": "cmd.exe"
 }

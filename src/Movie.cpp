@@ -40,10 +40,8 @@ void Movie::setTitle() {
   //if (kindOfMovie == "2d") {
     string titleSymbol;
     cout << "Would you like to watch \"Powrót Jedi\" (write: pj) or \"Imperium kontratakuje\" (write: ik)?" << endl;
-    while (titleSymbol != "pj" && titleSymbol != "ik") {
+    do {
     cin >> titleSymbol;
-    cout << "You wrote wrong title. Please write it ones more" << endl;
-    }
     if (titleSymbol == "pj") {
      title = "\"Powrót Jedi\"";
      movieSoundLevel = 222;
@@ -51,23 +49,12 @@ void Movie::setTitle() {
       title = "\"Imperium kontratakuje\"";
       movieSoundLevel = 333;
     } else {
-      cout << "We can play only one of these two movies." <<endl;
+      cout << "You wrote wrong title. Please write it ones more." <<endl;
     }
-    cout << endl;
-  /*} else {
-    cout << "Would you like to watch \"Ostatni Jedi\" (write: oj) or \"Skywalker. Odrodzenie\" (write: so)?" << endl;
-    string titleSymbol;
-    cin >> titleSymbol;
-    if (titleSymbol == "oj") {
-     title = "\"Ostatni Jedi\"";
-    } else if (titleSymbol == "so") {
-      title = "\"Skywalker. Odrodzenie\"";
-    } else {
-      cout << "We can play only one of these two movies." <<endl;
-    }
-    cout << endl;
-  }*/
+  } while (titleSymbol != "pj" && titleSymbol != "ik");
 }
+
+//string Movie::
 
 string Movie::getKindOfMovie() {
   return kindOfMovie;
@@ -148,7 +135,7 @@ void Movie::setIsPlaying(bool isp){
 }
 
   void Movie::readMovieFromConsole() {
-
+  setTitle();
   }
 
   ostream & operator<<(ostream & os, const Movie & m) {

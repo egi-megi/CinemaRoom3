@@ -5,7 +5,7 @@ using namespace std;
 
 TemperatureIndicator::TemperatureIndicator()
 {
-    tempValue = 5;
+    tempValue = 30;
     cout << "Constructor of TemperatureIndicator class is called." << endl;
 }
 

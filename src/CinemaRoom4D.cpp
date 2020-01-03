@@ -12,7 +12,7 @@ using namespace std;
 
 CinemaRoom4D::CinemaRoom4D() :CinemaRoom()
 {
-   
+    roomType = "Cinema Room 4D";
     isArmchairOn = false;
     cout << "Constructor of CinemaRoom class is called." << endl;
 }

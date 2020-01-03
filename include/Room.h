@@ -18,12 +18,10 @@ class Room
 
         virtual void readParamsFromConsole() ;
         virtual void closeAllInRoom() = 0;
-        virtual void checkTemperature();
+        //virtual void checkTemperature();
         virtual string getRoomTypeName()=0;
-        //void trunOnAircondition();
-        //void turnOffAircondition();
-        void setNumberOfChairs();
-        int getNumberOfChairs();
+        virtual void trunOnAircondition();
+        virtual void turnOffAircondition();
         virtual void write(ostream & os) const;
         virtual void read(istream &is);
         friend ostream & operator<<(ostream & os, const Room & sc);
@@ -32,11 +30,11 @@ class Room
         //void operator+= (Projector* proj);
         //void operator-= (Projector* projDel);
 
-        
     protected:
         TemperatureIndicator *tempIndicator;
-        //Aircondition aircondition;
-        int chairNumber;
+        Aircondition aircondition;
+        string roomType;
+
     private:
         
 };

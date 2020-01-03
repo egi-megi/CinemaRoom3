@@ -3,95 +3,288 @@
 #include "Aircondition.h"
 #include "Projector.h"
 #include "Screen.h"
+#include "Company.h"
 #include <iostream>
+#include <list>
+#include <vector>
+#include <iterator>
+#include <algorithm>
 
 using namespace std;
 
 ConferenceRoom::ConferenceRoom()
 {
-    projectorDigital = NULL;
+    roomType = "Conference Room";
+    chairNumber = 100;
+    projectorDigital = new Projector("digital");
     areWindowsOpen = false;
     cout << "Constructor of ConferenceRoom class is called." << endl;
 }
 
-ConferenceRoom::ConferenceRoom (const ConferenceRoom &conferenceRoom) 
+ConferenceRoom::ConferenceRoom(const ConferenceRoom &conferenceRoom)
 {
-    //aircondition = conferenceRoom.aircondition;
+    roomType = conferenceRoom.roomType;
+    aircondition = conferenceRoom.aircondition;
     projectorDigital = conferenceRoom.projectorDigital;
     screen = conferenceRoom.screen;
+    chairNumber = conferenceRoom.chairNumber;
     cout << "Called coping constructor for ConferenceRoom." << endl;
 }
 
 ConferenceRoom::~ConferenceRoom()
 {
+    delete projectorDigital;
     cout << "Destructor of ConferenceRoom object is called." << endl;
 }
 
-void ConferenceRoom::openWindows() {
-    if (areWindowsOpen == false) {
+void ConferenceRoom::openWindows()
+{
+    if (areWindowsOpen == false)
+    {
         cout << "Windows have been closed, so they will be open in a moment." << endl;
         areWindowsOpen = true;
-    } else {
+    }
+    else
+    {
         cout << "Windows have been opened." << endl;
     }
 }
 
-string ConferenceRoom::getRoomTypeName(){
-    return "Conference Room";
+string ConferenceRoom::getRoomTypeName()
+{
+    return roomType;
 }
 
-void ConferenceRoom::closeWindows() {
-    if (areWindowsOpen == false) {
+void ConferenceRoom::closeWindows()
+{
+    if (areWindowsOpen == false)
+    {
         cout << "Windows have been closed." << endl;
-    } else {
+    }
+    else
+    {
         cout << "Windows have been opened, so they will be closed in a moment." << endl;
         areWindowsOpen = false;
     }
 }
 
-void ConferenceRoom::closeAllInRoom() {
-    if (projectorDigital!=NULL) {
+void ConferenceRoom::closeAllInRoom()
+{
+    cout << "Movie is ended. Everything in " << roomType << " is turn off." << endl;
+    if (projectorDigital != NULL)
+    {
         projectorDigital->turnOff();
     }
-    //turnOffAircondition(); 
+    turnOffAircondition();
     closeWindows();
 }
 
-void ConferenceRoom::readParamsFromConsole() {
-    Room::readParamsFromConsole();
-    screen.readHeightOfScreenFromConsole();
-    readOpenCloseWindowsFromConsole();
+void ConferenceRoom::setNumberOfChairs()
+{
+    cout << "Write how many chairs should be in: ";
+    cin >> chairNumber;
+    cout << endl;
 }
 
-void ConferenceRoom::readOpenCloseWindowsFromConsole() {
+int ConferenceRoom::getNumberOfChairs()
+{
+    cout << "In the room will be " << chairNumber << "." << endl;
+    return chairNumber;
+}
+
+void ConferenceRoom::readParamsFromConsole()
+{
+    Room::readParamsFromConsole();
+    readNumberOfChairs();
+    readOpenCloseWindowsFromConsole();
+    readListOfCompaniesFromConsole();
+}
+
+void ConferenceRoom::readListOfCompaniesFromConsole() {
+    cout << "Would you like to write names of companies which will rent his Conference Room in next week? (Write y or n)" << endl;
     string yesNo;
-    if (areWindowsOpen) {
-        cout << "Windows are opened. Do you want to close them? (Write y or n)" << endl;
-        cin >> yesNo;
-        cout << endl;
-        if (yesNo == "y") {
-            closeWindows();
-        }
+    cin >> yesNo;
+    cout << endl;
+        do
+        {
+            if (yesNo == "y")
+            {
+                int amountOfCompanies;
+                cout << "How many companies do you want to write on list (7 or less -- one company for one day of week)?" << endl;
+                do {
+                cin >> amountOfCompanies;
+                cout << endl;
+                if (amountOfCompanies < 1 || amountOfCompanies > 7) {
+                    cout << "Wrong ansewr. Try again." << endl;
+                }
+                } while (amountOfCompanies < 1 || amountOfCompanies > 7);
+                vector<Company> listOfCompany;
+                for (int companyNumber = 1; companyNumber <= amountOfCompanies; companyNumber++) {
+                    Company company;
+                    cout << "Write name of company: " << endl;
+                    cin >> company.companyName;
+                    cout << endl;
+                    do {
+                    cout << "Write number of week's day (from 1 to 7): " << endl;
+                    cin >> company.rentDayNumber;
+                    cout << endl;
+                    } while (company.rentDayNumber < 1 || company.rentDayNumber > 7);
+                    listOfCompany.push_back(company);
+                }
+                sort(listOfCompany.begin(), listOfCompany.end(), sortByName);
+                cout << "Companies sort by name: \n Name\tDay of week\n";
+                for_each(listOfCompany.begin(), listOfCompany.end(), showListName);
+                sort(listOfCompany.begin(), listOfCompany.end(), sortByRentDay);
+                cout << "Companies sort by number of rent day: \nDay of week\tName\n";
+                for_each(listOfCompany.begin(), listOfCompany.end(), showListDay);
+            }
+            else if (yesNo == "n")
+            {
+            }
+            else
+            {
+                cout << "It is wrong answer. Try again." << endl;
+            }
+        } while (yesNo != "y" && yesNo != "n");
+
+}
+
+/*bool ConferenceRoom::operator<(const Company &c1, const Company & c2) {
+    if (c1.companyName < c2.companyName) {
+        return true;
+    } else if (c1.companyName == c2.companyName && c1.rentDayNumber < c2.rentDayNumber) {
+        return true;
     } else {
-        cout << " Windows are closed. Do you want to open it? (Write y or n)" << endl;
-        cin >> yesNo;
-        cout << endl;
-        if (yesNo == "y") {
-            openWindows();
-        }
+        return false;
+    }
+}*/
+
+
+
+
+bool sortByName(const Company &c1, const Company & c2) {
+    if (c1.companyName < c2.companyName) {
+        return true;
+    } else if (c1.companyName == c2.companyName && c1.rentDayNumber < c2.rentDayNumber) {
+        return true;
+    } else {
+        return false;
     }
 }
 
-// Method for getting new projector in cinema room
-void ConferenceRoom::operator+= (Projector* proj) {
-            if (projectorDigital == NULL) { 
-                projectorDigital = proj;
-                 cout << "There is " << projectorDigital->getProjectorType() << " projector set in this cinema room." << endl;
-               } else {
-                   cout << "Cinema room has already " << projectorDigital->getProjectorType() << " projector." << endl;
-               }
+bool sortByRentDay(const Company &c1, const Company & c2) {
+    if (c1.rentDayNumber < c2.rentDayNumber) {
+        return true;
+    } else if (c1.rentDayNumber == c2.rentDayNumber&& c1.companyName < c2.companyName) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+void showListName(const Company & cc) {
+    cout << cc.companyName << "\t" << cc.rentDayNumber << endl;
+}
+
+void showListDay(const Company & cc) {
+    cout << cc.rentDayNumber << "\t" << cc.companyName << endl;
+}
+
+void ConferenceRoom::readNumberOfChairs()
+{
+    string yesNo;
+    cout << "In this Conference Room are " << chairNumber << " chairs. Would you like to be another number of chairs? (Write y or n)" << endl;
+    cin >> yesNo;
+    cout << endl;
+    do
+    {
+        if (yesNo == "y")
+        {
+            cout << "So how many chairs should be in this Conference Room: " << endl;
+            cin >> chairNumber;
+            cout << endl;
         }
-        
+        else if (yesNo == "n")
+        {
+        }
+        else
+        {
+            cout << "It is wrong answer. Try again." << endl;
+        }
+    } while (yesNo != "y" && yesNo != "n");
+}
+
+void ConferenceRoom::readOpenCloseWindowsFromConsole()
+{
+    string yesNo;
+    if (areWindowsOpen)
+    {
+        cout << "Windows are opened. Do you want to close them? (Write y or n)" << endl;
+        cin >> yesNo;
+        cout << endl;
+        do
+        {
+            if (yesNo == "y")
+            {
+                closeWindows();
+            }
+            else if (yesNo == "n")
+            {
+            }
+            else
+            {
+                cout << "It is wrong answer. Try again." << endl;
+            }
+        } while (yesNo != "y" && yesNo != "n");
+    }
+    else
+    {
+        cout << " Windows are closed. Do you want to open it? (Write y or n)" << endl;
+        cin >> yesNo;
+        cout << endl;
+        do
+        {
+            if (yesNo == "y")
+            {
+                openWindows();
+            }
+            else if (yesNo == "n")
+            {
+            }
+            else
+            {
+                cout << "It is wrong answer. Try again." << endl;
+            }
+        } while (yesNo != "y" && yesNo != "n");
+    }
+}
+
+void ConferenceRoom::write(ostream &os) const
+{
+    cout << "Saving conference room" << endl;
+    Room::write(os);
+    os << chairNumber;
+}
+
+void ConferenceRoom::read(istream &is)
+{
+    Room::read(is);
+    is >> chairNumber;
+}
+
+// Method for getting new projector in cinema room
+void ConferenceRoom::operator+=(Projector *proj)
+{
+    if (projectorDigital == NULL)
+    {
+        projectorDigital = proj;
+        cout << "There is " << projectorDigital->getProjectorType() << " projector set in this cinema room." << endl;
+    }
+    else
+    {
+        cout << "Cinema room has already " << projectorDigital->getProjectorType() << " projector." << endl;
+    }
+}
 
 // Method used for example when projector is borken and must be removed
 /*void ConferenceRoom::operator-= (Projector* projDel) {
@@ -103,12 +296,17 @@ void ConferenceRoom::operator+= (Projector* proj) {
         }
 }*/
 
-    bool ConferenceRoom::operator== (ConferenceRoom const & cro1) const {
-       if (Room::operator==(cro1) /* && co tam jeszce chce*/) {
-            cout << "Saved object and read object are equal." << endl;
-            return true;
-          } else {
-              cout << "Saved objcet and read object are not equal." << endl;
-            return false;
-          }
+bool ConferenceRoom::operator==(ConferenceRoom const &cro1) const
+{
+    //ro1.chairNumber== chairNumber
+    if (Room::operator==(cro1) /* && co tam jeszce chce*/)
+    {
+        cout << "Saved object and read object are equal." << endl;
+        return true;
     }
+    else
+    {
+        cout << "Saved objcet and read object are not equal." << endl;
+        return false;
+    }
+}

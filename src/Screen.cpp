@@ -50,7 +50,7 @@ void Screen::setProportionOfScreenFromMovie(Movie *movie)
     proportionOfScreenWidth = movie->getProportionOfScreenWidthForMovie();
 }
 
-void Screen::readHeightOfScreenFromConsole() {
+void Screen::readHeightOfScreenForCinemaRoomFromConsole() {
   cout << "Would you like to watch movie on screen with height: 4, 5 or 6 meteres? (Write 4, 5 or 6)" << endl;
   cin >> heightOfScreen;
   cout << endl;

@@ -14,7 +14,7 @@ class Screen
         int getHeightOfScreen();
         void setHeightOfScreen(int heightOfScreen);
         void setProportionOfScreenFromMovie(Movie *movie);
-        void readHeightOfScreenFromConsole();
+        void readHeightOfScreenForCinemaRoomFromConsole();
         int getWidthOfScreen();
         void computeWidthOfScreen();
 
