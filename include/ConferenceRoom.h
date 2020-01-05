@@ -28,8 +28,8 @@ class ConferenceRoom: public Room
         void readNumberOfChairs();
         void readListOfCompaniesFromConsole();
         string getRoomTypeName();
-        void write(ostream & os) const;
-        void read(istream &is);
+        virtual void write(ostream & os) const;
+        virtual void read(istream &is);
         void operator+= (Projector* proj);
         void operator-= (Projector* projDel);
         bool operator== (ConferenceRoom const & cro1) const;

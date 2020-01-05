@@ -16,6 +16,7 @@ Room::Room()
 Room::Room (const Room &room) 
 {
     aircondition = room.aircondition;
+    roomType = room.roomType;
     //projectorDigital = cinemaRoom.projectorDigital;
     //projectorAnalog = cinemaRoom.projectorAnalog;
     cout << "Called coping constructor for Room." << endl;
@@ -84,11 +85,19 @@ istream & operator>>(istream &is, Room & ro) {
 }
 
 void Room::write(ostream & os) const{
+    os << roomType << endl;
     os << aircondition;
 }
 
 void Room::read(istream &is) {
+    //wczytaj getline room type i jesli jest pusty ( 0 length ) wczytaj jeszcze raz
+    getline(is, roomType);
+    if (roomType.empty()) {
+        getline(is, roomType);
+    }
+    is >> roomType;
     is >> aircondition;
+
 }
 
 

@@ -7,6 +7,8 @@
 #include "ConferenceRoom.h"
 #include "CinemaRoom4D.h"
 #include "Room.h"
+#include "Exception.h"
+#include "OpeningFileException.h"
 
 using namespace std;
 
@@ -88,13 +90,41 @@ void save(Room** rooms) {
     }
     fout.close();
 }
-void read(Room** rooms) {
+/*void read(Room** rooms) {
     ifstream fin;
     fin.open("Room.txt");
+    fin.exceptions ( std::ifstream::failbit | std::ifstream::badbit | std::ifstream::eofbit);
       for (int i = 0; i < 3; i++) {
         fin >> *rooms[i];
     }
     fin.close();
+}*/
+
+void read(Room** rooms) {
+    Room** roomsCopy=new Room*[3];
+    roomsCopy[0]=new CinemaRoom();
+    roomsCopy[1]=new CinemaRoom4D();
+    roomsCopy[2]=new ConferenceRoom();
+    try {
+        ifstream fin("Room.txt");
+        if (!fin)
+            throw OpeningFileException("Room.txt");
+        fin.exceptions ( std::ifstream::failbit | std::ifstream::badbit | std::ifstream::eofbit);
+        for (int i = 0; i < 3; i++) {
+            fin >> *roomsCopy[i];
+            cout<<"reading room "<<i<<"\n";
+        }
+        for (int i = 0; i < 3; i++) {
+            *rooms[i] = *roomsCopy[i];
+        } 
+     } catch (OpeningFileException& exc){
+        cerr << "Exception in opening file: "<< exc.description() << endl; 
+    } catch (...) {
+        cerr << "Exception in reading file: "<< "Room.txt" << endl; 
+    }
+    for (int i = 0; i < 3; i++) {
+            delete roomsCopy[i];
+        } 
 }
 
 
@@ -106,6 +136,8 @@ int main()
     rooms[0]=new CinemaRoom();
     rooms[1]=new CinemaRoom4D();
     rooms[2]=new ConferenceRoom();
+
+    
     do { //Main loop
         cout << endl;
         cout << "***** Choose room to manage *****"<< endl;

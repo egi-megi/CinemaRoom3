@@ -6,6 +6,7 @@
 #include <Screen.h>
 #include <Sound.h>
 #include <iostream>
+#include <OpeningFileException.h>
 
 using namespace std;
 
@@ -25,7 +26,7 @@ class Room
         virtual void write(ostream & os) const;
         virtual void read(istream &is);
         friend ostream & operator<<(ostream & os, const Room & sc);
-        friend istream & operator>>(istream & is, Room & sce);
+        friend istream & operator>>(istream & is, Room & sce) ;
         bool operator==(Room const & ro1) const;
         //void operator+= (Projector* proj);
         //void operator-= (Projector* projDel);

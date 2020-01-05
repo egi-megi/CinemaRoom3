@@ -12,7 +12,8 @@
         "stack": "cpp",
         "list": "cpp",
         "algorithm": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "vector": "cpp"
     },
     "terminal.integrated.shell.windows": "cmd.exe"
 }

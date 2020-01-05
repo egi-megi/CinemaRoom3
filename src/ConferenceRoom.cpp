@@ -274,13 +274,14 @@ void ConferenceRoom::write(ostream &os) const
 {
     cout << "Saving conference room" << endl;
     Room::write(os);
-    os << chairNumber;
+    os << chairNumber <<endl;
 }
 
 void ConferenceRoom::read(istream &is)
 {
     Room::read(is);
     is >> chairNumber;
+    cout << "Reading conference room" << endl;
 }
 
 // Method for getting new projector in cinema room

@@ -113,54 +113,13 @@ ostream & operator<<(ostream & os, const Aircondition & a) {
 
 istream & operator>>(istream &is, Aircondition & ar) {
     is >> ar.valueOfAircondition;
+    cout<<"read valueOfAircondition =="<<ar.valueOfAircondition<<"\n";
     is >> ar.ifTurnOn;
     is >> ar.heat;
     is >> ar.cool;
     return is;
 }
 
-/*
-void Aircondition::turnOn(){
-   ifTurnOn=true;
-   cout << "Aircondition is turn on." << endl;
-}
 
-void Aircondition::turnOff(){
-    ifTurnOn=false; 
-    cout << "Aircondition is turn off." << endl;
-}*/
-
-/*
-void Aircondition::check(int tempInCinemaRoom){
-    if (! ifTurnOn){
-        cool=false;
-        heat=false;
-        cout << "Aircondition is off"<<endl;
-        return;
-    }
-    if ((tempInCinemaRoom < valueOfAircondition + 2) && (tempInCinemaRoom > valueOfAircondition - 2 ) ) {
-        cool=false;
-        heat=false;
-        cout << "Temperature in cinema room is: " << tempInCinemaRoom << " degree. It is ok. Aircondition will be stand by." << endl;
-         
-    } */
-
-        /*if (tempIndicator->getTempValue() <= valueOfAircondition - 2 ) {
-        cool=false;
-        heat=true;
-        cout << "Temperature in cinema room is: "<< tempIndicator->getTempValue() << " degree. It is too cold. Aircondition will heat."<<endl;
-    }*/
-    /*if (tempInCinemaRoom <= valueOfAircondition - 2 ) {
-        cool=false;
-        heat=true;
-        cout << "Temperature in cinema room is: "<< tempInCinemaRoom << " degree. It is too cold. Aircondition will heat."<<endl;
-    }
-    
-    if (tempInCinemaRoom >= valueOfAircondition + 2 ) {
-        cool=true;
-        heat=false;
-        cout << "Temperature in cinema room is: " << tempInCinemaRoom << " degree. It is too warm. Aircondition will cool."<<endl;
-    }
-}*/
 
 
