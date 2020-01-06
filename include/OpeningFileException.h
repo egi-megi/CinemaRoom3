@@ -2,6 +2,8 @@
 #define OFEXCEPTION_H
 #include "Exception.h"
 #include <iostream>
+#include <cstring>
+#include <stdio.h>
 
 using namespace std;
 

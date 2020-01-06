@@ -31,10 +31,38 @@
 		<Compiler>
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
+			<Add directory="include" />
 		</Compiler>
+		<Unit filename="include/Aircondition.h" />
+		<Unit filename="include/CinemaRoom.h" />
+		<Unit filename="include/CinemaRoom4D.h" />
+		<Unit filename="include/Company.h" />
+		<Unit filename="include/ConferenceRoom.h" />
+		<Unit filename="include/Exception.h" />
+		<Unit filename="include/Movie.h" />
+		<Unit filename="include/OpeningFileException.h" />
+		<Unit filename="include/Projector.h" />
+		<Unit filename="include/Room.h" />
+		<Unit filename="include/Screen.h" />
+		<Unit filename="include/Sound.h" />
+		<Unit filename="include/TemperatureIndicator.h" />
+		<Unit filename="src/Aircondition.cpp" />
+		<Unit filename="src/CinemaRoom.cpp" />
+		<Unit filename="src/CinemaRoom4D.cpp" />
+		<Unit filename="src/Company.cpp" />
+		<Unit filename="src/ConferenceRoom.cpp" />
+		<Unit filename="src/Movie.cpp" />
+		<Unit filename="src/Projector.cpp" />
+		<Unit filename="src/Room.cpp" />
+		<Unit filename="src/Screen.cpp" />
+		<Unit filename="src/Sound.cpp" />
+		<Unit filename="src/TemperatureIndicator.cpp" />
+		<Unit filename="src/main.cpp" />
 		<Extensions>
 			<envvars />
-			<code_completion />
+			<code_completion>
+				<search_path add="include" />
+			</code_completion>
 			<debugger />
 			<lib_finder disable_auto="1" />
 		</Extensions>

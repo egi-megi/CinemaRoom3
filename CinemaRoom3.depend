@@ -1,0 +1,18 @@
+# depslib dependency file v1.0
+1578328932 source:/home/egi-megi/WEITI/studia/2019-2010_semZimowy/przedmioty/ProgramowanieObiektowe/CinemaRoom3/src/Aircondition.cpp
+	"Aircondition.h"
+	"Movie.h"
+	"TemperatureIndicator.h"
+	<iostream>
+
+1578328932 /home/egi-megi/WEITI/studia/2019-2010_semZimowy/przedmioty/ProgramowanieObiektowe/CinemaRoom3/include/Aircondition.h
+	"TemperatureIndicator.h"
+	<iostream>
+
+1578328932 /home/egi-megi/WEITI/studia/2019-2010_semZimowy/przedmioty/ProgramowanieObiektowe/CinemaRoom3/include/TemperatureIndicator.h
+	<iostream>
+
+1578328932 /home/egi-megi/WEITI/studia/2019-2010_semZimowy/przedmioty/ProgramowanieObiektowe/CinemaRoom3/include/Movie.h
+	<string>
+	<iostream>
+
