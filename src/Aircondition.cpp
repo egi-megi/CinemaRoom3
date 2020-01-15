@@ -117,6 +117,7 @@ istream & operator>>(istream &is, Aircondition & ar) {
     is >> ar.ifTurnOn;
     is >> ar.heat;
     is >> ar.cool;
+    cout<<"aircondition read \n";
     return is;
 }
 

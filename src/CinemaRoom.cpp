@@ -197,7 +197,6 @@ void CinemaRoom::write(ostream &os) const
     if (playingMovie != NULL)
     {
         os << 1 << endl;
-        os << aircondition;
         os << *playingMovie;
     }
     else
@@ -210,10 +209,11 @@ void CinemaRoom::read(istream &is)
 {
     Room::read(is);
     int hasM;
+    cout << "before reading hasm"<< endl;
     is >> hasM;
+    cout << "Hasm is "<< hasM << endl;
     if (hasM == 1)
     {
-        is >> aircondition;
         Movie *m = new Movie();
         is >> *m;
         playingMovie = m;

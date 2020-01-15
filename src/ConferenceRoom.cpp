@@ -103,13 +103,14 @@ void ConferenceRoom::readParamsFromConsole()
 void ConferenceRoom::readListOfCompaniesFromConsole() {
     cout << "Would you like to write names of companies which will rent his Conference Room in next week? (Write y or n)" << endl;
     string yesNo;
+    int amountOfCompanies;
     do
         {
     cin >> yesNo;
     cout << endl;
             if (yesNo == "y")
             {
-                int amountOfCompanies;
+                
                 cout << "How many companies do you want to write on list (7 or less -- one company for one day of week)?" << endl;
                 do {
                 cin >> amountOfCompanies;
@@ -139,6 +140,60 @@ void ConferenceRoom::readListOfCompaniesFromConsole() {
                 cout << "Companies sort by number of rent day: \nDay\tName\n";
                 vector<Company>::iterator ir;
                 for (ir = listOfCompany.begin(); ir != listOfCompany.end(); ir++)
+                cout << ir->rentDayNumber << "\t" <<  ir->companyName << endl;
+                //for_each(listOfCompany.begin(), listOfCompany.end(), showListDay);
+                addCompaniesToListOfCompaniesFromConsole(listOfCompany, amountOfCompanies);
+            }
+            else if (yesNo == "n")
+            {
+            }
+            else
+            {
+                cout << "It is wrong answer. Try again." << endl;
+            }
+        } while (yesNo != "y" && yesNo != "n");
+
+}
+
+void ConferenceRoom::addCompaniesToListOfCompaniesFromConsole(vector<Company> listOfCompanies, int lengthOfBegginingVector) {
+    cout << "Would you like to add mote companies w? (Write y or n)" << endl;
+    string yesNo;
+    int numberOfAddCompany = 7 - lengthOfBegginingVector;
+    do
+        {
+    cin >> yesNo;
+    cout << endl;
+            if (yesNo == "y")
+            {
+                int amountOfCompanies;
+                cout << "How many companies do you want to add to list (on the list can be max 7 companies, so you can add max " << numberOfAddCompany << " companies)?" << endl;
+                do {
+                cin >> amountOfCompanies;
+                cout << endl;
+                if (amountOfCompanies < 1 || amountOfCompanies > 7 - lengthOfBegginingVector) {
+                    cout << "Wrong ansewr. Try again." << endl;
+                }
+                } while (amountOfCompanies < 1 || amountOfCompanies > 7 - lengthOfBegginingVector);
+                for (int companyNumber = 1; companyNumber <= amountOfCompanies; companyNumber++) {
+                    Company company;
+                    cout << "Write name of company: " << endl;
+                    cin >> company.companyName;
+                    cout << endl;
+                    do {
+                    cout << "Write number of week's day (from 1 to 7): " << endl;
+                    cin >> company.rentDayNumber;
+                    cout << endl;
+                    } while (company.rentDayNumber < 1 || company.rentDayNumber > 7);
+                    listOfCompanies.push_back(company);
+                }
+                sort(listOfCompanies.begin(), listOfCompanies.end(), sortByName);
+                cout << "Companies sort by name: \n Name\tDay of week\n";
+                for_each(listOfCompanies.begin(), listOfCompanies.end(), showListName);
+
+                sort(listOfCompanies.begin(), listOfCompanies.end(), sortByRentDay);
+                cout << "Companies sort by number of rent day: \nDay\tName\n";
+                vector<Company>::iterator ir;
+                for (ir = listOfCompanies.begin(); ir != listOfCompanies.end(); ir++)
                 cout << ir->rentDayNumber << "\t" <<  ir->companyName << endl;
                 //for_each(listOfCompany.begin(), listOfCompany.end(), showListDay);
             }
@@ -205,7 +260,7 @@ void ConferenceRoom::readNumberOfChairs()
         {
             if (yesNo == "y") {
             cout << "So how many chairs should be in this Conference Room: " << endl;
-            }
+            
             do {
                 cin >> chairNumber;
                 cout << endl;
@@ -220,7 +275,8 @@ void ConferenceRoom::readNumberOfChairs()
                 } else {
                     cout << "Wrong answer. Try agin.  Value for number of chairs should be between 1 and 500: " << endl;
                 }
-            } while (chairNumber < 1 || chairNumber > 500);   
+            } while (chairNumber < 1 || chairNumber > 500);  
+        } 
         }
         else
         {

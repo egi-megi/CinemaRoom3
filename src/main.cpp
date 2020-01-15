@@ -112,10 +112,12 @@ void read(Room** rooms) {
         fin.exceptions ( std::ifstream::failbit | std::ifstream::badbit | std::ifstream::eofbit);
         for (int i = 0; i < 3; i++) {
             fin >> *roomsCopy[i];
-            cout<<"reading room "<<i<<"\n";
+            cout<<"read room "<<i<<"\n";
         }
         for (int i = 0; i < 3; i++) {
-            *rooms[i] = *roomsCopy[i];
+            Room* tmp=rooms[i];
+            rooms[i] = roomsCopy[i];
+            roomsCopy[i]=tmp;
         } 
      } catch (OpeningFileException& exc){
         cerr << "Exception in opening file: "<< exc.description() << endl; 

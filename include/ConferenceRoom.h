@@ -9,6 +9,8 @@
 #include <algorithm>
 #include <list>
 #include <vector>
+#include <iterator>
+#include <algorithm>
 
 using namespace std;
 
@@ -30,6 +32,7 @@ class ConferenceRoom: public Room
         string getRoomTypeName();
         virtual void write(ostream & os) const;
         virtual void read(istream &is);
+        void addCompaniesToListOfCompaniesFromConsole(vector<Company> listOfCompanies, int lengthOfBegginingVector);
         void operator+= (Projector* proj);
         void operator-= (Projector* projDel);
         bool operator== (ConferenceRoom const & cro1) const;

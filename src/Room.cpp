@@ -95,7 +95,6 @@ void Room::read(istream &is) {
     if (roomType.empty()) {
         getline(is, roomType);
     }
-    is >> roomType;
     is >> aircondition;
 
 }
