@@ -1,17 +1,14 @@
 Cinema Room
-33
+8
 1
 1
 0
 1
 2d
-"Powrót Jedi"
+"Powrót"
 222
 digital
-9
-16
-1
-Cinema Room 4D
+a Room 4D
 20
 0
 0
